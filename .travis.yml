@@ -10,6 +10,7 @@ before_script:
   - export PATH=$PATH:$PWD/check-types
   - chmod +x $PWD/check-types/check-types
 script:
+  - uname -m -s
   - check-types update $PWD/cycle-telegram/src/runtime-types
 branches:
   except:
