@@ -1,2 +1,3 @@
 # check-types
-Check types utility for cycle-telegram tests
+
+> Check types utility for cycle-telegram tests
