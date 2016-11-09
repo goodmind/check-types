@@ -8,6 +8,7 @@ before_script:
   - mkdir check-types
   - wget https://github.com/goodmind/check-types/releases/download/v0.1/check-types -O ./check-types/check-types
   - export PATH=$PATH:$PWD/check-types
+  - chmod +x $PWD/check-types/check-types
 script:
   - check-types update $PWD/cycle-telegram/src/runtime-types
 branches:
