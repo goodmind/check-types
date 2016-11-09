@@ -6,7 +6,7 @@ install:
   - git clone -b diversity https://github.com/goodmind/cycle-telegram
 before_script:
   - mkdir check-types
-  - wget https://github.com/goodmind/check-types/releases/download/v0.1/check-types -O ./check-types/
+  - wget https://github.com/goodmind/check-types/releases/download/v0.1/check-types -O ./check-types/check-types
   - export PATH=$PATH:$PWD/check-types
 script:
   - check-types update $PWD/cycle-telegram/src/runtime-types
