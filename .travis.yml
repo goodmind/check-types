@@ -1,10 +1,13 @@
 sudo: false
-language: c
+language: node_js
 notifications:
   email: false
+before_install:
+  - npm i -g npm@^3.0.0
 install:
   - git clone -b diversity https://github.com/goodmind/cycle-telegram
 before_script:
+  - npm prune
   - mkdir check-types
   - wget https://github.com/goodmind/check-types/releases/download/v0.1/check-types -O ./check-types/check-types
   - export PATH=$PATH:$PWD/check-types
@@ -12,6 +15,7 @@ before_script:
 script:
   - uname -m -s
   - check-types update $PWD/cycle-telegram/src/runtime-types
+  - check-types $PWD/cycle-telegram/src/runtime-types
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
