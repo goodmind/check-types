@@ -16,11 +16,11 @@ before_install:
   - cd ..
 before_script:
   - docker build -t chrysler .
-  - docker run chrysler /bin/sh -c "cd /root/remote-types; npm prune"
-  - docker run chrysler /bin/sh -c "npm i -g /root/remote-types"
+  - docker exec chrysler /bin/sh -c "cd /root/remote-types; npm prune"
+  - docker exec chrysler /bin/sh -c "npm i -g /root/remote-types"
 script:
-  - docker run chrysler /bin/sh -c "check-types update /root/cycle-telegram/src/runtime-types"
-  - docker run chrysler /bin/sh -c "check-types /root/cycle-telegram/src/runtime-types"
+  - docker exec chrysler /bin/sh -c "check-types update /root/cycle-telegram/src/runtime-types"
+  - docker exec chrysler /bin/sh -c "check-types /root/cycle-telegram/src/runtime-types"
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
