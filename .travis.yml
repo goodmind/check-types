@@ -1,5 +1,7 @@
 sudo: false
 language: crystal
+services:
+  - docker
 crystal:
   - latest
 notifications:
