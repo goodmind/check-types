@@ -1,5 +1,7 @@
 FROM node
 COPY . /root
+
+ENV TERM xterm
 ENV PATH "/root/check-types/bin:$PATH"
 
 RUN apt-get update
