@@ -13,7 +13,7 @@ before_script:
   - npm i -g $PWD/remote-types
   - mkdir -p $PWD/check-types/bin
   - wget https://github.com/goodmind/check-types/releases/download/v0.1/check-types -O $PWD/check-types/bin/check-types
-  - export PATH=$PATH:$PWD/check-types/bin/check-types
+  - export PATH=$PATH:$PWD/check-types/bin
   - chmod +x $PWD/check-types/bin/check-types
 script:
   - uname -m -s
