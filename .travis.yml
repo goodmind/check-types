@@ -13,6 +13,7 @@ before_install:
   - mkdir bin
   - crystal build ./src/check-types.cr -o ./bin/check-types
   - chmod +x ./bin/check-types
+  - cd ..
 before_script:
   - docker build -t chrysler .
   - docker run chrysler /bin/sh -c "cd /root/remote-types; npm prune"
