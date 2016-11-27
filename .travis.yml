@@ -4,10 +4,13 @@ node_js:
   - 'node'
 notifications:
   email: false
+env:
+  - BRANCH=development
+  - BRANCH=master
 before_install:
   - npm i -g npm@^3.0.0
 install:
-  - git clone -b diversity https://github.com/goodmind/cycle-telegram
+  - git clone -b $BRANCH https://github.com/goodmind/cycle-telegram
 before_script:
   - cd $PWD/remote-types; npm prune; cd ..
   - npm i -g $PWD/remote-types
