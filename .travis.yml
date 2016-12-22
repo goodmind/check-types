@@ -4,10 +4,13 @@ services:
   - docker
 crystal:
   - latest
+env:
+  - BRANCH=development
+  - BRANCH=master
 notifications:
   email: false
 before_install:
-  - git clone -b diversity https://github.com/goodmind/cycle-telegram
+  - git clone -b $BRANCH https://github.com/goodmind/cycle-telegram
   - cd $PWD/check-types
   - crystal deps
   - mkdir bin
