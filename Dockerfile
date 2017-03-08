@@ -11,6 +11,6 @@ RUN cd /root/remote-types; npm prune
 RUN npm cache clean
 RUN npm i -g /root/remote-types
 RUN check-types update /root/cycle-telegram/src/runtime-types
-RUN ls /root
-RUN ls
+RUN cat botapidoc.txt
+RUN cat botlocaltypes.txt
 RUN check-types /root/cycle-telegram/src/runtime-types
