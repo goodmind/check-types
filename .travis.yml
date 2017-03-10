@@ -27,6 +27,7 @@ before_script:
   - cd $PWD/remote-types; npm prune
   - cd ..
   - npm i -g $PWD/remote-types
+  - export PATH=$PWD/check-types/bin:$PATH
 script:
   - check-types update $PWD/cycle-telegram/src/runtime-types
   - check-types $PWD/cycle-telegram/src/runtime-types
