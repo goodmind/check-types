@@ -1,25 +1,36 @@
 sudo: false
-language: node_js
-node_js:
-  - 'node'
-notifications:
-  email: false
+language: crystal
+services:
+  - docker
+crystal:
+  - latest
 env:
   - BRANCH=development
   - BRANCH=master
-before_install:
-  - npm i -g npm@^3.0.0
+  - BRANCH=unified
+notifications:
+  email: false
+addons:
+  apt:
+    packages:
+    - html2text
 install:
+  - . $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - nvm use stable
   - git clone -b $BRANCH https://github.com/goodmind/cycle-telegram
 before_script:
-  - cd $PWD/remote-types; npm prune; cd ..
+  - cd $PWD/check-types
+  - crystal deps
+  - mkdir bin
+  - crystal build ./src/check-types.cr -o ./bin/check-types
+  - chmod +x ./bin/check-types
+  - cd ..
+  - cd $PWD/remote-types; npm prune
+  - cd ..
   - npm i -g $PWD/remote-types
-  - mkdir -p $PWD/check-types/bin
-  - wget https://github.com/goodmind/check-types/releases/download/v0.1/check-types -O $PWD/check-types/bin/check-types
-  - export PATH=$PATH:$PWD/check-types/bin
-  - chmod +x $PWD/check-types/bin/check-types
+  - export PATH=$PWD/check-types/bin:$PATH
 script:
-  - uname -m -s
   - check-types update $PWD/cycle-telegram/src/runtime-types
   - check-types $PWD/cycle-telegram/src/runtime-types
 branches:

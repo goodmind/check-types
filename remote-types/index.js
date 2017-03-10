@@ -5,7 +5,7 @@ let path = require('path')
 let fs = require('fs')
 
 function isInterface(symbol) {
-  return (symbol.flags & ts.TypeFlags.Interface) !== 0
+  return (symbol.objectFlags & ts.ObjectFlags.Interface) !== 0
 }
 
 function isVarStatement(node) {

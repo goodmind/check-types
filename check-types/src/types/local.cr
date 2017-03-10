@@ -8,7 +8,7 @@ module Types
   class Local
     @types : Array(String)
 
-    def initialize(dir : String)
+    def initialize(dir : String, @selected : Array(String) = [] of String)
       @dir = dir
       @foreign_types = [
         "Request",
@@ -17,7 +17,7 @@ module Types
         "UpdateInlineQuery",
         "UpdateMessage",
         "UpdatesState",
-        "WebhookInfo",
+        # "WebhookInfo",
         "WebhookResponse"
       ]
       @types = parse(read(dir))
@@ -44,9 +44,16 @@ module Types
       return types
         .lines
         .grep(/export const/)
-        .map { |str| str.gsub(/export const (.*)=( )?(.*)?\n/, "\\1") }
+        .map { |str| str.gsub(/export const (.*)=( )?(.*)?\n?/, "\\1") }
         .map { |str| str.strip }
         .sort_by! { |str| str.downcase } - @foreign_types
+    end
+
+    def filter(types)
+      unless @selected.empty?
+        return types.select { |a| @selected.includes?(a) }
+      end
+      types
     end
   end
 end
