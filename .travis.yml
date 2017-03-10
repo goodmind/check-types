@@ -10,9 +10,11 @@ env:
   - BRANCH=unified
 notifications:
   email: false
+addons:
+  apt:
+    packages:
+    - html2text
 install:
-  - apt-get update
-  - apt-get install html2text
   - . $HOME/.nvm/nvm.sh
   - nvm install stable
   - nvm use stable
