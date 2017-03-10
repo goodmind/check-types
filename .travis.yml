@@ -7,18 +7,29 @@ crystal:
 env:
   - BRANCH=development
   - BRANCH=master
+  - BRANCH=unified
 notifications:
   email: false
-before_install:
+install:
+  - apt-get update
+  - apt-get install html2text
+  - . $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - nvm use stable
   - git clone -b $BRANCH https://github.com/goodmind/cycle-telegram
+before_script:
   - cd $PWD/check-types
   - crystal deps
   - mkdir bin
   - crystal build ./src/check-types.cr -o ./bin/check-types
   - chmod +x ./bin/check-types
   - cd ..
-before_script:
-  - docker build -t chrysler .
+  - cd $PWD/remote-types; npm prune
+  - cd ..
+  - npm i -g $PWD/remote-types
+script:
+  - check-types update $PWD/cycle-telegram/src/runtime-types
+  - check-types $PWD/cycle-telegram/src/runtime-types
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
